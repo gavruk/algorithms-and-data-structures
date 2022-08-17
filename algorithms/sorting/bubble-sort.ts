@@ -5,6 +5,7 @@
 
 export function sort1(arr: number[]): number[] {
   const data = [...arr];
+
   for (let i = 0; i < data.length - 1; i++) {
     for (let j = 0; j < data.length - 1 - i; j++) {
       if (data[j] > data[j + 1]) {
@@ -14,11 +15,13 @@ export function sort1(arr: number[]): number[] {
       }
     }
   }
+
   return data;
 }
 
 export function sort2(arr: number[]): number[] {
   const data = [...arr];
+
   let swapped = true;
   while (swapped) {
     swapped = false;
@@ -31,5 +34,6 @@ export function sort2(arr: number[]): number[] {
       }
     }
   }
+
   return data;
 }
