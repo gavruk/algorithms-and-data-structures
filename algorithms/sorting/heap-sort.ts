@@ -24,7 +24,7 @@ function maxHeapify(arr: number[], heapSize: number, index: number): void {
 export function sort(arr: number[]): number[] {
   const data = [...arr];
 
-  for (let i = Math.floor(data.length / 2); i >= 0; i--) {
+  for (let i = Math.floor(data.length / 2) - 1; i >= 0; i--) {
     maxHeapify(data, data.length, i);
   }
 
