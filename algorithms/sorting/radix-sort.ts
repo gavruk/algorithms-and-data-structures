@@ -1,9 +1,9 @@
 /*
- * Time Complexity: O(N + K)
+ * Time Complexity: O(W(N + K))
  * Auxiliary Space: O(N + K)
  */
 
-export function sort(arr: number[]): number[] {
+function countingSort(arr: number[], placeVal: number): number[] {
   const data = [...arr];
 
   const shift = Math.min(...data);
@@ -12,8 +12,6 @@ export function sort(arr: number[]): number[] {
   for (const elem of arr) {
     counts[elem - shift] += 1;
   }
-  // we now overwrite our original counts with the starting index
-  // of each element in the final sorted array
   let startingIndex = 0;
   for (let i = 0; i < K + 1; i++) {
     const count = counts[i];
@@ -23,10 +21,27 @@ export function sort(arr: number[]): number[] {
 
   for (const elem of arr) {
     data[counts[elem - shift]] = elem;
-    // since we have placed an item in index counts[elem], we need to
-    // increment counts[elem] index by 1 so the next duplicate element
-    // is placed in appropriate index
     counts[elem - shift] += 1;
+  }
+
+  return data;
+}
+
+export function sort(arr: number[]): number[] {
+  const data = [...arr];
+
+  const maxElem = Integer.MIN_VALUE;
+  for (const elem of arr) {
+    if (elem > maxElem) {
+      maxElem = elem;
+    }
+  }
+
+  let placeVal = 1;
+  while (maxElem / placeVal > 0) {
+    console.log(data, placeVal);
+    countingSort(data, placeVal);
+    placeVal *= 10;
   }
 
   return data;
