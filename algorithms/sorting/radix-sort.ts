@@ -3,34 +3,36 @@
  * Auxiliary Space: O(N + K)
  */
 
-function countingSort(arr: number[], placeVal: number): number[] {
-  const data = [...arr];
-
-  const shift = Math.min(...data);
-  const K = Math.max(...data) - shift;
-  const counts = new Array(K + 1).fill(0);
+function countingSort(arr: number[], placeVal: number, numberOfDigits: number, K: number = 10): void {
+  const counts = new Array(K).fill(0);
   for (const elem of arr) {
-    counts[elem - shift] += 1;
+    const digit= Math.floor(elem / placeVal) % K;
+    counts[digit] += 1
   }
   let startingIndex = 0;
-  for (let i = 0; i < K + 1; i++) {
+  for (let i = 0; i < K; i++) {
     const count = counts[i];
     counts[i] = startingIndex;
     startingIndex += count;
   }
 
+  const sortedArray = [...arr];
   for (const elem of arr) {
-    data[counts[elem - shift]] = elem;
-    counts[elem - shift] += 1;
+    const digit= Math.floor(elem / placeVal) % K;
+    sortedArray[counts[digit]] = elem;
+    counts[digit] += 1;
   }
-
-  return data;
+  for (let i = 0; i < arr.length; i++) {
+    arr[i] = sortedArray[i];
+  }
 }
 
 export function sort(arr: number[]): number[] {
   const data = [...arr];
+  const numberOfDigits = data[0].toString().length;
+  const K = 10;
 
-  const maxElem = Integer.MIN_VALUE;
+  let maxElem = Number.MIN_VALUE;
   for (const elem of arr) {
     if (elem > maxElem) {
       maxElem = elem;
@@ -38,10 +40,9 @@ export function sort(arr: number[]): number[] {
   }
 
   let placeVal = 1;
-  while (maxElem / placeVal > 0) {
-    console.log(data, placeVal);
-    countingSort(data, placeVal);
-    placeVal *= 10;
+  while (Math.floor(maxElem / placeVal) > 0) {
+    countingSort(data, placeVal, numberOfDigits, K);
+    placeVal *= K;
   }
 
   return data;

@@ -1,5 +1,5 @@
 import { ITest, runTests } from '../../testing';
-import { sort } from './counting-sort';
+import { sort } from './radix-sort';
 
 const tests: ITest<number[], number[]>[] = [
   {
