@@ -3,7 +3,7 @@
  * Auxiliary Space: O(N + K)
  */
 
-function countingSort(arr: number[], placeVal: number, numberOfDigits: number, K: number = 10): void {
+function countingSort(arr: number[], placeVal: number, K: number = 10): void {
   const counts = new Array(K).fill(0);
   for (const elem of arr) {
     const digit= Math.floor(elem / placeVal) % K;
@@ -29,7 +29,6 @@ function countingSort(arr: number[], placeVal: number, numberOfDigits: number, K
 
 export function sort(arr: number[]): number[] {
   const data = [...arr];
-  const numberOfDigits = data[0].toString().length;
   const K = 10;
 
   let maxElem = Number.MIN_VALUE;
@@ -41,7 +40,7 @@ export function sort(arr: number[]): number[] {
 
   let placeVal = 1;
   while (Math.floor(maxElem / placeVal) > 0) {
-    countingSort(data, placeVal, numberOfDigits, K);
+    countingSort(data, placeVal, K);
     placeVal *= K;
   }
 
