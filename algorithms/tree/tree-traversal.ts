@@ -22,6 +22,25 @@ export function preorderTraversalIterative<T>(root: TreeNode<T> | null): T[] {
   return result;
 };
 
+function runPreorderTraversalRecursive<T>(root: TreeNode<T>, result: T[]) {
+  result.push(root.val);
+  if (root.left) {
+    runPreorderTraversalRecursive(root.left, result);
+  }
+  if (root.right) {
+    runPreorderTraversalRecursive(root.right, result);
+  }
+}
+
+export function preorderTraversalRecursive<T>(root: TreeNode<T> | null): T[] {
+  if (!root) {
+    return [];
+  }
+  const result: T[] = [];
+  runPreorderTraversalRecursive(root, result);
+  return result;
+};
+
 
 // In-order traversal is to traverse the left subtree first. Then visit the root. Finally, traverse the right subtree.
 // Left — Root — Right
@@ -41,6 +60,25 @@ export function inorderTraversalIterative<T>(root: TreeNode<T> | null): T[] {
     result.push(curr.val);
     curr = curr.right;
   }
+  return result;
+};
+
+function runInorderTraversalRecursive<T>(root: TreeNode<T>, result: T[]) {
+  if (root.left) {
+    runInorderTraversalRecursive(root.left, result);
+  }
+  result.push(root.val);
+  if (root.right) {
+    runInorderTraversalRecursive(root.right, result);
+  }
+}
+
+export function inorderTraversalRecursive<T>(root: TreeNode<T> | null): T[] {
+  if (!root) {
+    return [];
+  }
+  const result: T[] = [];
+  runInorderTraversalRecursive(root, result);
   return result;
 };
 
@@ -67,6 +105,25 @@ export function postorderTraversalIterative<T>(root: TreeNode<T> | null): T[] {
   return result;
 };
 
+
+function runPostorderTraversalRecursive<T>(root: TreeNode<T>, result: T[]) {
+  if (root.left) {
+    runPostorderTraversalRecursive(root.left, result);
+  }
+  if (root.right) {
+    runPostorderTraversalRecursive(root.right, result);
+  }
+  result.push(root.val);
+}
+
+export function postorderTraversalRecursive<T>(root: TreeNode<T> | null): T[] {
+  if (!root) {
+    return [];
+  }
+  const result: T[] = [];
+  runPostorderTraversalRecursive(root, result);
+  return result;
+};
 
 // Level-order traversal is to traverse the tree level by level.
 // Breadth-First Search is an algorithm to traverse or search in data structures like a tree or a graph. The algorithm starts with a root node and visit the node itself first. Then traverse its neighbors, traverse its second level neighbors, traverse its third level neighbors, so on and so forth.
