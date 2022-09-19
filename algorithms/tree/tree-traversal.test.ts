@@ -6,6 +6,7 @@ import {
   inorderTraversalRecursive,
   postorderTraversalIterative,
   postorderTraversalRecursive,
+  levelorderTraversal,
 } from './tree-traversal';
 
 runTests('pre order traversal [iterative]', [
@@ -70,3 +71,14 @@ runTests('post order traversal [recursive]', [
     result: [3, 2, 1],
   },
 ], postorderTraversalRecursive);
+
+runTests('level order traversal', [
+  {
+    input: convertArrayToTree([1, 2, 3, 4, 5, 6]),
+    result: [1, 2, 3, 4, 5, 6],
+  },
+  {
+    input: convertArrayToTree([1, null, 2, 3]),
+    result: [1, 2, 3],
+  },
+], levelorderTraversal);

@@ -125,5 +125,43 @@ export function postorderTraversalRecursive<T>(root: TreeNode<T> | null): T[] {
   return result;
 };
 
+
 // Level-order traversal is to traverse the tree level by level.
 // Breadth-First Search is an algorithm to traverse or search in data structures like a tree or a graph. The algorithm starts with a root node and visit the node itself first. Then traverse its neighbors, traverse its second level neighbors, traverse its third level neighbors, so on and so forth.
+function getTreeHeight<T>(root: TreeNode<T> | null): number {
+  if (!root) {
+    return 0;
+  }
+  const leftHeight = getTreeHeight(root.left);
+  const rightHeight = getTreeHeight(root.right);
+  if (leftHeight >= rightHeight) {
+    return leftHeight + 1;
+  } else {
+    return  rightHeight + 1;
+  }
+}
+
+function runCurrentLevel<T>(root: TreeNode<T> | null, level: number, result: T[]): void {
+  if (root == null) {
+    return;
+  }
+  if (level === 0) {
+    result.push(root.val);
+    return;
+  }
+  runCurrentLevel(root.left, level - 1, result);
+  runCurrentLevel(root.right, level - 1, result);
+}
+
+
+export function levelorderTraversal<T>(root: TreeNode<T> | null): T[] {
+  if (!root) {
+    return [];
+  }
+  const result: T[] = [];
+  const height = getTreeHeight(root);
+  for (let i = 0; i < height; i++) {
+    runCurrentLevel(root, i, result);
+  }
+  return result;
+};
