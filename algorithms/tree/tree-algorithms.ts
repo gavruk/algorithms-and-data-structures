@@ -1,0 +1,10 @@
+import TreeNode from '../../data-structures/tree';
+
+export function maxDepth<T>(root: TreeNode<T> | null): number {
+  if (root === null) {
+    return 0;
+  }
+  const leftDepth = maxDepth(root.left);
+  const rightDepth = maxDepth(root.right);
+  return Math.max(leftDepth, rightDepth) + 1;
+};
