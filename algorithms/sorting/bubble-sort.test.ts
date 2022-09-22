@@ -1,4 +1,4 @@
-import { ITest, runTests } from '../../testing';
+import { ITest } from '../../testing';
 import { sort1, sort2 } from './bubble-sort';
 
 const tests: ITest<number[], number[]>[] = [
@@ -16,5 +16,16 @@ const tests: ITest<number[], number[]>[] = [
   },
 ];
 
-runTests('Bubble sort v1', tests, sort1);
-runTests('Bubble sort v2', tests, sort2);
+describe('Bubble Sort', () => {
+  it('should sort 1', () => {
+    tests.forEach((t) => {
+      expect(t.result).toEqual(sort1(t.input));
+    });
+  });
+
+  it('should sort 2', () => {
+    tests.forEach((t) => {
+      expect(t.result).toEqual(sort2(t.input));
+    });
+  });
+});

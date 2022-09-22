@@ -1,4 +1,4 @@
-import { ITest, runTests } from '../../testing';
+import { ITest } from '../../testing';
 import { sort } from './radix-sort';
 
 const tests: ITest<number[], number[]>[] = [
@@ -20,4 +20,10 @@ const tests: ITest<number[], number[]>[] = [
   },
 ];
 
-runTests('Radix sort', tests, sort);
+describe('Radix Sort', () => {
+  it('should sort', () => {
+    tests.forEach((t) => {
+      expect(t.result).toEqual(sort(t.input));
+    });
+  });
+});

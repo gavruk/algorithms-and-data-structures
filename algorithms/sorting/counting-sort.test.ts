@@ -1,4 +1,4 @@
-import { ITest, runTests } from '../../testing';
+import { ITest } from '../../testing';
 import { sort } from './counting-sort';
 
 const tests: ITest<number[], number[]>[] = [
@@ -16,4 +16,10 @@ const tests: ITest<number[], number[]>[] = [
   },
 ];
 
-runTests('Counting sort', tests, sort);
+describe('Counting Sort', () => {
+  it('should sort', () => {
+    tests.forEach((t) => {
+      expect(t.result).toEqual(sort(t.input));
+    });
+  });
+});

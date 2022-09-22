@@ -1,4 +1,4 @@
-import { ITest, runTests } from '../../testing';
+import { ITest } from '../../testing';
 import { sort } from './bucket-sort';
 
 const tests: ITest<number[], number[]>[] = [
@@ -24,4 +24,10 @@ const tests: ITest<number[], number[]>[] = [
   },
 ];
 
-runTests('Bucket sort', tests, sort);
+describe('Bucket Sort', () => {
+  it('should sort', () => {
+    tests.forEach((t) => {
+      expect(t.result).toEqual(sort(t.input));
+    });
+  });
+});
