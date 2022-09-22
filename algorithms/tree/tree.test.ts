@@ -2,7 +2,8 @@ import { runTests, convertArrayToTree } from '../../testing';
 import { 
   maxDepth,
   isSymmetric,
-} from './tree-algorithms';
+  minDepth,
+} from './tree';
 
 runTests('tree max depth', [
   {
@@ -17,3 +18,10 @@ runTests('tree is symmetric', [
     result: true,
   },
 ], isSymmetric);
+
+runTests('tree min depth', [
+  {
+    input: convertArrayToTree([1, 2, 3, 4, 5, 6]),
+    result: 3,
+  },
+], minDepth);
